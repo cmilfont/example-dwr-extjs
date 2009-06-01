@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- Console output -->
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %d{MM-dd HH:mm:ss} %m  (%F:%L) \n" />
+		</layout>
+	</appender>
+	
+	<!-- Log de arquivo -->
+	<appender name="ARQLOG" class="org.apache.log4j.RollingFileAppender">
+		<param name="MaxFileSize" value="10240KB" />
+		<param name="File" value="c:\\twcms.log"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %d{HH:mm:ss} %m [%t](%F:%L)\n" />
+		</layout>
+	</appender>
+
+	<category name="org.apache.commons.digester.Digester">
+		<priority value="fatal" />
+	</category>
+	<category name="org.apache.commons.beanutils">
+		<priority value="fatal" />
+	</category>
+	<category name="org.apache.jasper.servlet.JspServlet">
+		<priority value="fatal" />
+	</category>
+
+	<!-- Debug do iBatis
+	<category name="java.sql">
+		<priority value="debug" />
+	</category>
+	-->
+	
+    <!-- Log the real SQL -->
+    <category name="org.hibernate.SQL">
+        <priority value="DEBUG"/>
+    </category>
+    
+    <!-- Log the parameter substitutions in the SQL statement. Unfortunately logging org.hibernate gives a lot of other junk as well -->
+    <category name="org.hibernate">
+        <priority value="DEBUG"/>
+    </category>
+	
+	<!--The root category defines the top level of appenders all catagories inherit -->
+	<root>
+		<priority value="info" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</log4j:configuration>
